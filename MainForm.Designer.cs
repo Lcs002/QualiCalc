@@ -47,7 +47,7 @@
             this.BtnVCC.Name = "BtnVCC";
             this.BtnVCC.Size = new System.Drawing.Size(75, 23);
             this.BtnVCC.TabIndex = 1;
-            this.BtnVCC.Text = "button1";
+            this.BtnVCC.Text = "Variable Control Chart";
             this.BtnVCC.UseVisualStyleBackColor = true;
             // 
             // MainForm

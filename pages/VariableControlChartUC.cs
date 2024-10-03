@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
+using System.Security;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,21 +21,12 @@ namespace QualiCalc.pages
         {
             InitializeComponent();
 
-            List<double> va = new List<double>()
-            {
-                94.9, 94.9,
-                95.04,  94.79,
-                95.09,  94.56,
-                94.87,  94.7,
-                95, 94.71,
-                95.2,  95,
-                94.98,   94.91,
-                95.13,  94.58,
-                95.17,  94.53,
-                94.93,  94.56
-            };
+            BtnLoadData.Click += new EventHandler(OnLoadDataClick);
+        }
 
-            VariableControlChart.Out _out = VariableControlChart.Exec(va, 97, 93);
+        private void Update(string filePath)
+        {
+            VariableControlChart.Out _out = VariableControlChart.Exec(filePath, 97, 93);
 
             Chart.Series.Clear();
 
@@ -59,6 +51,12 @@ namespace QualiCalc.pages
             _lcl.Color = Color.Red;
             _utl.Color = Color.Green;
             _ltl.Color = Color.Green;
+
+            _avg.BorderWidth = 2;
+            _ucl.BorderWidth = 2;
+            _lcl.BorderWidth = 2;
+            _utl.BorderWidth = 2;
+            _ltl.BorderWidth = 2;
 
             _data.ChartType = SeriesChartType.Line;
             _avg.ChartType = SeriesChartType.Line;
@@ -93,6 +91,22 @@ namespace QualiCalc.pages
             IsCapable.Checked = _out.isCapable;
             IsNonconforming.Checked = _out.isNonconfirming;
             IsCentered.Checked = _out.isCentered;
+        }
+
+        private void OnLoadDataClick(object sender, EventArgs e)
+        {
+            if (_OpenFileDialogue.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    Update(_OpenFileDialogue.FileName);
+                }
+                catch (SecurityException ex)
+                {
+                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                    $"Details:\n\n{ex.StackTrace}");
+                }
+            }
         }
     }
 }

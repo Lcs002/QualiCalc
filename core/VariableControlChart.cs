@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -11,7 +13,40 @@ namespace QualiCalc.core
 {
     public static class VariableControlChart
     {
-        public static Out Exec(List<double> data, double utl, double ltl)
+        public static Out Exec(string filePath, double utl, double ltl)
+        {
+            List<double> data = new List<double>();
+            using (TextFieldParser csvParser = new TextFieldParser(filePath))
+            {
+                csvParser.CommentTokens = new string[] { "#" };
+                csvParser.SetDelimiters(new string[] { ";" });
+                csvParser.HasFieldsEnclosedInQuotes = false;
+                csvParser.TrimWhiteSpace = true;
+
+                // Skip the row with the column names
+                csvParser.ReadLine();
+
+                while (!csvParser.EndOfData)
+                {
+                    // Read current line fields, pointer moves to the next line.
+                    string[] fields = csvParser.ReadFields();
+
+                    try
+                    {
+                        data.Add(Convert.ToDouble(fields[0]));
+                        Console.WriteLine(fields[0]);
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+                }
+            }
+
+            return _Exec(data, utl, ltl);
+        }
+
+        private static Out _Exec(List<double> data, double utl, double ltl)
         {
             double n = data.Count();
             double avg = data.Sum() / n;                                         // Average

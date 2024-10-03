@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.IsControlled = new System.Windows.Forms.CheckBox();
             this.IsAcceptable = new System.Windows.Forms.CheckBox();
@@ -41,21 +41,23 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.BtnLoadData = new System.Windows.Forms.Button();
+            this._OpenFileDialogue = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
             this.SuspendLayout();
             // 
             // Chart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.Chart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.Chart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.Chart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.Chart.Legends.Add(legend2);
             this.Chart.Location = new System.Drawing.Point(17, 14);
             this.Chart.Name = "Chart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.Chart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.Chart.Series.Add(series2);
             this.Chart.Size = new System.Drawing.Size(823, 349);
             this.Chart.TabIndex = 0;
             this.Chart.Text = "chart1";
@@ -156,10 +158,25 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "-------->";
             // 
+            // BtnLoadData
+            // 
+            this.BtnLoadData.Location = new System.Drawing.Point(17, 383);
+            this.BtnLoadData.Name = "BtnLoadData";
+            this.BtnLoadData.Size = new System.Drawing.Size(75, 23);
+            this.BtnLoadData.TabIndex = 11;
+            this.BtnLoadData.Text = "Load Data";
+            this.BtnLoadData.UseVisualStyleBackColor = true;
+            // 
+            // _OpenFileDialogue
+            // 
+            this._OpenFileDialogue.FileName = "openFileDialog1";
+            this._OpenFileDialogue.Filter = "CSV File|*.csv";
+            // 
             // VariableControlChartUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtnLoadData);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -190,5 +207,7 @@
         private Label label2;
         private Label label3;
         private Label label4;
+        private Button BtnLoadData;
+        private OpenFileDialog _OpenFileDialogue;
     }
 }
